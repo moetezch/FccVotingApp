@@ -6,8 +6,7 @@ module.exports ={
     githubClientID:process.env.GUTHUB_CLIENT_ID,
     githubClientSecret:process.env.GITHUB_CLIENT_SECRET,
     mongoURI:process.env.MONGO_URI,
-    cookieKey:process.env.COOKIE_KEY,
-    redirectDomain:process.env.REDIRECT_DOMAIN
+    cookieKey:process.env.COOKIE_KEY
 
 }
 

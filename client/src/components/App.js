@@ -5,9 +5,11 @@ import * as actions from '../actions'
 
 import Header from './Header'
 import Landing from './Landing'
-const Polls = () => <h2>Polls</h2>
-const MyPolls = () => <h2>MyPolls</h2>
-const PollNew = () => <h2>PollNew</h2>
+import MyPolls from './polls/MyPolls'
+import PollNew from './polls/PollNew'
+import Polls from './polls/Polls'
+
+
 
 
 class App extends Component {
