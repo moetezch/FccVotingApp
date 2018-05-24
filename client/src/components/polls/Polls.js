@@ -6,6 +6,7 @@ const Polls = ()=>{
     <h1>
   Polls
     </h1>
+
     </div>
 )
 }

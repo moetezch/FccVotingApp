@@ -7,7 +7,7 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
     <label>{label}</label>
     <div>
-      <input {...input} type={type} placeholder={label} style={{marginBottom:"5px"}}/>
+      <input {...input} type={type} placeholder={label} style={{marginBottom:"5px"}} />
       <div className="red-text" style={{marginBottom:"20px"}}>
       {touched && error && <span>{error}</span>}
       </div>
@@ -47,6 +47,7 @@ class PollForm extends Component {
 
 render() {
    const { handleSubmit, pristine, reset, submitting } = this.props;
+
     return (
 
       <form onSubmit={handleSubmit}>
@@ -55,6 +56,8 @@ render() {
         type="text"
         component={renderField}
         label="Poll title"
+        
+        
       />
       <FieldArray name="options" component={renderOptions} />
       <div>
