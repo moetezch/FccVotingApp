@@ -1,3 +1,5 @@
 export const FETCH_USER='fetch_user'
 export const FETCH_POLLS='fetch_polls'
+export const FETCH_ALL_POLLS='fetch_ALL_polls'
 export const DELETE_POLL='delete_poll'
+export const UPDATE_VOTE='update_vote'
