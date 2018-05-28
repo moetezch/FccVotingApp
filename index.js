@@ -25,7 +25,6 @@ app.use(passport.session())
 
 require("./routes/authRoutes")(app)
 require("./routes/pollRoutes")(app)
-require("./routes/NonAuthRoutes")(app)
 
 
 if (process.env.NODE_ENV==='production') {

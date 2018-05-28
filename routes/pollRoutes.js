@@ -52,12 +52,27 @@ app.delete('/api/polls/delete/:id',requireLogin,async (req,res)=>{
       if (err) {
         return console.log(err);
       }
-      console.log('Vote Updated....');
       res.sendStatus(200);
     })
    
   });
- 
+  app.put('/api/polls/edit/:id',  (req, res) => {
+    const optionName = req.body.option
+    Poll.findOne({_id:req.params.id}, function(err, poll) {
+      if (err) {
+        throw err;
+      }
+      poll.options.push({name: optionName});
+  
+      poll.save(function(err, poll) {
+        if (err) {
+            res.status(400).json({msg: 'Failed to add option to poll'});
+        } else {
+          res.json({poll: poll, msg: 'Successfully updated poll', success: true});
+        }
+      });
+    });
+  });
+  
 }
 
-//Poll.updateOne({"options._id":"5b06632126ac14148ce4cafd"}, { $inc: { "options.$.votes": 1 } }).then(console.log)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { FETCH_USER,FETCH_POLLS,DELETE_POLL,UPDATE_VOTE,FETCH_ALL_POLLS } from './types'
+import { FETCH_USER,FETCH_POLLS,DELETE_POLL,UPDATE_VOTE,FETCH_ALL_POLLS,UPDATE_POLL } from './types'
 
 export const fetchUser = () => async (dispatch) => {
   const res = await axios.get('/api/current_user')
@@ -27,4 +27,8 @@ export const deletePoll=(id)=>async dispatch =>{
 export const updateVote=(id)=>async dispatch =>{
   const res = await axios.post('/api/polls/vote/'+id)
   dispatch({ type: UPDATE_VOTE, payload: res.data })
+}
+export const updatePoll=(id,values)=>async dispatch=>{
+  const res = await axios.put('/api/polls/edit/'+id,values)
+  dispatch({ type: UPDATE_POLL, payload: res.data })
 }

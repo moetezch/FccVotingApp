@@ -1,25 +1,31 @@
-import React, { Component } from 'react';
-import PollForm from './PollForm'
+import React, { Component } from 'react'
+import AddOptionForm from './AddOptionForm'
 import { connect } from 'react-redux'
-import {submitPoll} from '../../actions/index'
-import {fetchPolls} from '../../actions'
+import { updatePoll } from '../../actions'
+let pollID
 class PollEdit extends Component {
+  componentDidMount() {
+    pollID = this.props.match.params.id
+
+  }
   onSubmit = (poll) => {
-    console.log(this.props);
-    
-    
+    this.props.updatePoll(poll)
+    this.props.history.push('/polls')
+  
   };
   render() {
     return (
-     
-      <PollForm onSubmit={this.onSubmit}/>
+      <AddOptionForm onSubmit={this.onSubmit} {...this.props} />
     );
   }
 }
 
-function mapStateToProps(state,props) {
-  //return {polls:state.polls} 
- return {poll: state.polls.find((poll) => poll.id === props.match.params.id)} 
+function mapStateToProps(state, props) {
+  return { poll: state.polls.find((poll) => poll._id === props.match.params.id) }
 }
 
-export default connect(mapStateToProps,{fetchPolls})(PollEdit)
+const mapDispatchToProps = (dispatch) => ({
+  updatePoll: (poll) => dispatch(updatePoll(pollID, poll)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PollEdit)

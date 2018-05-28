@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { reduxForm, Field, FieldArray } from 'redux-form'
-import validate from '../../utils/validateForm'
-
+import { reduxForm, Field } from 'redux-form'
+import validate from '../../utils/validateOption'
 
 const renderField = ({ input, label, type, meta: { touched, error } }) => (
   <div>
@@ -15,49 +14,23 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
   </div>
 );
 
-const renderOptions = ({ fields, meta: { touched, error, submitFailed } }) => (
-  <ul>
-    <li>
-      <button className="btn" type="button" onClick={() => fields.push({})}><i className="material-icons small">add</i> Add Options</button>
-      {(touched || submitFailed) && error && <span>{error}</span>}
-    </li>
-    {fields.map((option, index) => (
-      <li key={index}>
-        <button
-          className="btn red right"
-          type="button"
-          title="Remove Option"
-          onClick={() => fields.remove(index)}
-        >
-          <i className="material-icons small">delete</i>
-        </button>
-        <h4>Option #{index + 1}</h4>
-        <Field
-          name={`${option}.name`}
-          type="text"
-          component={renderField}
-          label="Option"
-        />
-      </li>
-    ))}
-  </ul>
-);
-
-class PollForm extends Component {
+class AddOptionForm extends Component {
 
   render() {
+
+
     const { handleSubmit, pristine, reset, submitting } = this.props;
 
     return (
 
       <form onSubmit={handleSubmit}>
         <Field
-          name="title"
+          name="option"
           type="text"
           component={renderField}
-          label="Poll title"
+          label="Add Option"
+
         />
-        <FieldArray name="options" component={renderOptions} />
         <div>
           <button className="btn waves-effect waves-light" type="submit" disabled={submitting}><i className="material-icons right">done</i>Save</button>
           <button className="btn right waves-effect waves-light lime" type="button" disabled={pristine || submitting} onClick={reset}>
@@ -65,12 +38,15 @@ class PollForm extends Component {
             Clear Values
         </button>
         </div>
+
       </form>
+
     );
   }
 }
 
 export default reduxForm({
-  form: 'pollForm',
+  form: 'addOptionForm',
   validate
-})(PollForm)
+
+})(AddOptionForm)
